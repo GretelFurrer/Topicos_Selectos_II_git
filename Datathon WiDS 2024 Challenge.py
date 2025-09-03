@@ -20,7 +20,7 @@ from sklearn.feature_selection import RFECV
 from sklearn.model_selection import cross_val_score
 
 # %%
-df_datathon = pd.read_csv('/Users/gretelfurrer/MAESTRIA_CIENCIA_DE_DATOS/3rd_sem_MCD/GRANDES_BASES_DE_DATOS_II/widsdatathon2024-challenge1/training.csv', sep=',') 
+df_datathon = pd.read_csv('widsdatathon2024-challenge1/training.csv', sep=',') 
 df_datathon.head()
 # %%
 df_datathon.info()
