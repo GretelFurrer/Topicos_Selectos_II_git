@@ -11,7 +11,6 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 # Módulos propios
 from module_path import train_data_path, test_data_path
 
-
 COL_PATIENT_ID = "patient_id"
 COL_PATIENT_RACE = "patient_race"
 COL_PAYER_TYPE = "payer_type"

@@ -9,7 +9,7 @@ from module_ml import Model
 def main():
     data = Dataset()
     df_train, df_test = data.load_data_clean_encoded()
-    print(df_train.head())
+    X,y = data.load_xy()
 
     #model
     ml = Model(X=X,y=y, seed = 42)
@@ -17,3 +17,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+   
