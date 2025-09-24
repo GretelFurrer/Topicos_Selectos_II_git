@@ -13,10 +13,11 @@ from sklearn.metrics import confusion_matrix, classification_report, roc_curve, 
 
 #mlflow
 import mlflow
+from mlflow.models import infer_signature
 
 def mlflow_logger(func):
     def wrapper(*args, **kwargs):
-        mlruns_path = "../"
+        mlruns_path = "/Users/gretelfurrer/MAESTRIA_CIENCIA_DE_DATOS/3rd_sem_MCD/GRANDES_BASES_DE_DATOS_II/Topicos_Selectos_II_git/mlruns"
         mlflow.set_tracking_uri(mlruns_path)
         experiment_name = "WIDS2024"
 
@@ -52,4 +53,17 @@ class Model ():
        roc_score  = roc_auc_score(y_test,y_pred)
        print(f'Accuracy : {accuracy}')
        print(f'ROC : {roc_score}')
+
+       #registro en mlflow
+       mlflow.log_param("model type", type(model).__name__)
+       mlflow.log_metric("accuracy", accuracy)
+       mlflow.log_metric("roc_auc", roc_score)
+       signature = mlflow.models.infer_signature(X_train, model.predict(X_train))
+         # Guardar el modelo con la firma
+       mlflow.sklearn.log_model(model, "model",signature=signature)
+       
+       
+
+       
+         
 
