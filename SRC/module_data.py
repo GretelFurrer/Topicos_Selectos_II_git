@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 from sklearn.impute import SimpleImputer
 from sklearn.impute import KNNImputer
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
 
 # Scikit-learn
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
@@ -155,24 +157,67 @@ class Dataset():
 
         return df_train,df_test
     
-    def load_data_clean_encoded(self):
-        df_train,df_test = self.load_data_clean()
+    def load_data_clean_encoded(self, method:int="std"):
+        df_train, df_test = self.load_data_clean()
 
-        test_categories = df_test.select_dtypes(include=['object']).columns.tolist()
+        train_categories = df_train.select_dtypes(include=['object']).columns.tolist()
+        train_numeric = df_train.select_dtypes(include=['number']).columns.tolist()
+        train_numeric.remove(COL_DIAGPERIODL90D)
 
-        df_train_encoded = pd.get_dummies(df_train, columns=test_categories, drop_first=False, dtype=int)
-        df_test_encoded = pd.get_dummies(df_test, columns=test_categories, drop_first=False, dtype=int)
+        # Escalamiento de variables numéricas
 
-        return df_train_encoded, df_test_encoded 
+        if method == 'std':
+            scaler = StandardScaler()
+        elif method == 'minmax':
+            scaler = MinMaxScaler()
+        X_train_scaled = scaler.fit_transform(df_train[train_numeric]) # array de numpy
+        X_train_scaled_df = pd.DataFrame(X_train_scaled, columns=train_numeric, index=df_train.index)
+        
+        # Reescribir mi dataframe original
+        target = df_train[COL_DIAGPERIODL90D]
+        df_train = pd.merge(df_train[train_categories], X_train_scaled_df, left_index=True, right_index=True)
+        df_train = pd.merge(df_train, target, left_index=True, right_index=True)
+        train_numeric.append(COL_DIAGPERIODL90D)
+
+        # Codificación de variables categóricas
+        # Instanciamos el codificador OneHotEncoder
+        ohe = OneHotEncoder(drop='first', sparse_output=False, dtype=int)
+
+        # Aplicamos la codificación con ColumnTransformer
+        column_transformer = ColumnTransformer(
+            transformers=[
+           ('cat', ohe, train_categories)
+            ],
+            remainder='passthrough'  # deja pasar las columnas numéricas sin cambios
+        )
+
+        # Aplicamos el transformador
+        X_train_encoded = column_transformer.fit_transform(df_train)
+        #X_test_encoded = column_transformer.fit_transform(df_test)
+
+        # Recuperamos los nombres de las columnas dummy codificadas
+        encoded_col_names = column_transformer.named_transformers_['cat'].get_feature_names_out(train_categories)
+
+        # Combinamos nombres codificados y los que pasaron directamente
+        final_columns = list(encoded_col_names) + train_numeric  # agregar nombres de las columnas que pasaron sin transformación
+
+        # Convertimos a DataFrame para inspección
+        df_train_encoded = pd.DataFrame(X_train_encoded, columns=final_columns)
+        #df_test_encoded = pd.DataFrame(X_test_encoded, columns=final_columns)
+
+        # Mostramos las primeras filas
+        print(df_train_encoded.head())
+
+        #df_train_encoded = pd.get_dummies(df_train, columns=test_categories, drop_first=False, dtype=int)
+        #df_test_encoded = pd.get_dummies(df_test, columns=test_categories, drop_first=False, dtype=int)
+
+        return df_train_encoded
+
     
     def load_xy(self):
-        df_train,df_test = self.load_data_clean_encoded
+        df_train = self.load_data_clean_encoded()
 
-        X_train = df_train.drop(columns = [COL_DIAGPERIODL90D])
+        X = df_train.drop(columns=[COL_DIAGPERIODL90D])
         y = df_train[COL_DIAGPERIODL90D]
 
-
-    
-
-
-
+        return X, y

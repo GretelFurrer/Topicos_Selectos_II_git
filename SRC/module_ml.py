@@ -10,6 +10,26 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, classification_report, roc_curve, accuracy_score, roc_auc_score
 
+
+#mlflow
+import mlflow
+
+def mlflow_logger(func):
+    def wrapper(*args, **kwargs):
+        mlruns_path = "../"
+        mlflow.set_tracking_uri(mlruns_path)
+        experiment_name = "WIDS2024"
+
+        try:
+            exp_id = mlflow.create_experiment(name=experiment_name)
+        except Exception as e:
+            exp = mlflow.get_experiment_by_name(experiment_name).experiment_id
+        with mlflow.start_run(experiment_id=exp_id):
+            return func(*args, **kwargs)    
+    return wrapper
+
+
+
 class Model ():
     def __init__(self, X:pd.DataFrame, y:pd.Series, seed:int=42):
         self.X = X
@@ -20,7 +40,9 @@ class Model ():
         X_train, X_test, y_train, y_test = train_test_split(self.X, self.y, train_size=train_size, random_state=self.seed )
         return X_train, X_test, y_train, y_test
 
+    @mlflow_logger #decorador
     def evaluate (self,model):
+       print(f'Metodo:{type(model).__class__.__name__}')
        X_train, X_test, y_train, y_test = self.split()
        model.fit (X_train, y_train)
        print('Entrenamiento completado')
