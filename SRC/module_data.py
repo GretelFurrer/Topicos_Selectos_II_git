@@ -1,14 +1,12 @@
 # Librería estándar
 import os
-import pandas as pd
 import numpy as np
-from sklearn.impute import SimpleImputer
-from sklearn.impute import KNNImputer
-from sklearn.preprocessing import StandardScaler, MinMaxScaler, OneHotEncoder
-from sklearn.compose import ColumnTransformer
+import pandas as pd
 
 # Scikit-learn
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, OneHotEncoder
+from sklearn.impute import SimpleImputer
+from sklearn.compose import ColumnTransformer
 
 # Módulos propios
 from module_path import train_data_path, test_data_path
@@ -99,63 +97,63 @@ COL_DIAGPERIODL90D = "DiagPeriodL90D"
 
 class Dataset():
 
-    def __init__ (self, numsamples:int=None, seed:int=100):
-        self.num_samples = numsamples
+    def __init__(self, num_samples:int=None, seed:int=100):
+        self.num_samples = num_samples
         self.seed = seed
 
     def load_data(self):
+        
         train_path = train_data_path()
         test_path = test_data_path()
 
-        df_train= pd.read_csv()
-        df_test= pd.read_csv()
+        df_train = pd.read_csv(train_path)
+        df_test = pd.read_csv(test_path)
 
-        cols=['patient_id','breast_cancer_diagnosis_desc','metastatic_first_novel_treatment', 'metastatic_first_novel_treatment_type']
-
-        df_train= df_train.drop(columns=cols)
-        df_test= df_test.drop(columns=cols)
+        cols=['patient_id','breast_cancer_diagnosis_desc',
+                 'metastatic_first_novel_treatment',
+                 'metastatic_first_novel_treatment_type']
+        df_train = df_train.drop(columns=cols)
+        df_test = df_test.drop(columns=cols)
 
         if self.num_samples is not None:
-            df_train = df_train.sample(n=self.num_samples , randomstate = self.seed)
-            df_test = df_test.sample(n=self.num_samples, randomstate = self.seed)
+            df_train = df_train.sample(n=self.num_samples,
+                                       random_state=self.seed)
+            df_test = df_test.sample(n=self.num_samples,
+                                     random_state=self.seed)
 
-        return df_train,df_test
+        return df_train, df_test
     
-
     def load_data_clean(self):
-        df_train,df_test = self.load_data()
-        
-        ## Clasificacion de bmi
+        df_train, df_test = self.load_data()
+
+        # BMI
         df_train['bmi_category'] = pd.cut(df_train['bmi'], bins=[0, 18.5, 24.9, 29.9, 34.9,39.9, np.inf], labels=['Underweight', 'Normal', 'Overweight', 'Obesity I', 'Obesity II','Extreme']).astype(object)
         df_test['bmi_category'] = pd.cut(df_test['bmi'], bins=[0, 18.5, 24.9, 29.9, 34.9,39.9, np.inf], labels=['Underweight', 'Normal', 'Overweight', 'Obesity I', 'Obesity II','Extreme']).astype(object)
-        
         df_train['bmi_category'] = df_train['bmi_category'].fillna('Unknown')
         df_test['bmi_category'] = df_test['bmi_category'].fillna('Unknown')
-        
         df_train.drop(columns=['bmi'], inplace=True)
         df_test.drop(columns=['bmi'], inplace=True)
 
-
-        #race
+        # Race
         df_train['patient_race'] = df_train['patient_race'].fillna('Unknown')
         df_test['patient_race'] = df_test['patient_race'].fillna('Unknown')
 
-        #payment 
+        # Payment
         df_train['payer_type'] = df_train['payer_type'].fillna('Unknown')
         df_test['payer_type'] = df_test['payer_type'].fillna('Unknown')
-
-        #drop na only df train
+        
+        # Drop na (only training)
         df_train = df_train.dropna()
 
-        #Fill test data
+        # Fill test data
         test_categories = df_test.select_dtypes(include=['object']).columns.tolist()
         test_numeric = df_test.select_dtypes(include=['number']).columns.tolist()
         num_imputer = SimpleImputer(strategy='mean')
         df_test[test_numeric] = num_imputer.fit_transform(df_test[test_numeric])
         cat_imputer = SimpleImputer(strategy='most_frequent')
         df_test[test_categories] = cat_imputer.fit_transform(df_test[test_categories])
-
-        return df_train,df_test
+       
+        return df_train, df_test
     
     def load_data_clean_encoded(self, method:int="std"):
         df_train, df_test = self.load_data_clean()
@@ -214,8 +212,8 @@ class Dataset():
         return df_train_encoded
 
     
-    def load_xy(self):
-        df_train = self.load_data_clean_encoded()
+    def load_xy(self, method:str='std'):
+        df_train = self.load_data_clean_encoded(method=method)
 
         X = df_train.drop(columns=[COL_DIAGPERIODL90D])
         y = df_train[COL_DIAGPERIODL90D]
