@@ -21,7 +21,7 @@ def main():
     # Model
     ml = Model(X=X, y=y, seed=42)
     ml.evaluate(LogisticRegression(max_iter=5000))
-    ml.evaluate(KNeighborsClassifier())
+    ml.evaluate(KNeighborsClassifier( n_neighbors=5, weights='uniform', algorithm='auto'))
     ml.evaluate(DecisionTreeClassifier())
     ml.evaluate(RandomForestClassifier())
 

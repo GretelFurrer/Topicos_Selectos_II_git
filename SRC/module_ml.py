@@ -62,6 +62,8 @@ class Model():
         # Registros con mlflow
         mlflow.log_param("Model Type", type(model).__name__)
         mlflow.log_metric("accuracy", accuracy)
+        mlflow.log_metric("roc_auc", roc_score)
+        # Log model
         signature = infer_signature(X_train, model.predict(X_train))
         mlflow.sklearn.log_model(model, "model", signature=signature)
 
