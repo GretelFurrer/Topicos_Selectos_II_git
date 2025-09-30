@@ -21,9 +21,9 @@ def main():
     # Model
     ml = Model(X=X, y=y, seed=42)
     ml.evaluate(LogisticRegression(max_iter=5000))
-    ml.evaluate(KNeighborsClassifier( n_neighbors=5, weights='uniform', algorithm='auto'))
-    ml.evaluate(DecisionTreeClassifier())
-    ml.evaluate(RandomForestClassifier())
+    #ml.evaluate(KNeighborsClassifier( n_neighbors=5, weights='uniform', algorithm='auto'))
+    ml.evaluate(DecisionTreeClassifier( max_depth=5, min_samples_split=2, min_samples_leaf=1 ))
+    ml.evaluate(RandomForestClassifier( n_estimators=100, max_depth=5, min_samples_split=2, min_samples_leaf=1  ))
 
 if __name__ == "__main__":
     main()
