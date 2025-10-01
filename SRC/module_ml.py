@@ -19,7 +19,7 @@ def mlflow_logger(func):
     def wrapper(*args, **kwargs):
         # creamos un nuevo experimento
         mlruns_path = "../mlruns"
-        mlflow.set_tracking_uri(mlruns_path)
+        mlflow.set_tracking_uri(f"file:{mlruns_path}")
         experiment_name = "WIDS2024"
 
         try:
