@@ -29,6 +29,7 @@ def main():
     ml.evaluate(DecisionTreeClassifier( random_state=10, min_samples_split=50,min_samples_leaf=10))
     ml.evaluate(RandomForestClassifier( n_estimators=100, max_depth=5, min_samples_split=2, min_samples_leaf=1  ))
     ml.evaluate(MLPClassifier(hidden_layer_sizes=(100,), activation='relu', solver='adam', max_iter=5000, random_state=42 ))
+    
 
 if __name__ == "__main__":
     main()
