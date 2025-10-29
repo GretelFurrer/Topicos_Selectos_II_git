@@ -3,7 +3,7 @@ Tópicos Selectos II - Python Data Science Projects
 Repositorio académico que contiene scripts modulares en Python para análisis de datos y proyectos de deep learning, implementados como parte del curso de Tópicos Selectos II.
 
 Proyectos Implementados
-1.  Proyecto Datathon - Análisis Predictivo
+# 1.  Proyecto Datathon - Análisis Predictivo
 Ubicación: Datathon/
 
 Pipeline completo de machine learning para competencias de datos, desde preprocesamiento hasta modelado avanzado.
@@ -18,7 +18,7 @@ Funciones_Optimizacion.py - Fine-tuning de hiperparámetros y validación cruzad
 
 Funciones_Preprocesamiento.py - Limpieza, transformación y feature engineering
 
-2. Proyecto Deep Learning - Redes Neuronales
+# 2. Proyecto Deep Learning - Redes Neuronales
 Ubicación: Deep_Learning/
 
 Implementación de redes neuronales para diversos problemas de machine learning.
@@ -31,7 +31,7 @@ RedNeuronal_Regresion.py - NN para problemas de regresión
 
 Funciones_RedNeuronal.py - Utilidades y funciones auxiliares para DL
 
-Stack Tecnológico
+# Stack Tecnológico
 Lenguaje: Python 3.8+
 
 Machine Learning: scikit-learn, XGBoost, LightGBM
