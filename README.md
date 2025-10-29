@@ -1,10 +1,10 @@
-# 📚 Tópicos Selectos II - Portfolio de Proyectos
+#  Tópicos Selectos II - Portfolio de Proyectos
 
 Repositorio académico que contiene múltiples proyectos de ciencia de datos y deep learning desarrollados para el curso de Tópicos Selectos II. Incluye scripts modulares para datathon, redes neuronales y análisis de datos.
 
-## 🗂️ Proyectos Implementados
+##  Proyectos Implementados
 
-### 1. 🏆 Proyecto Datathon - Health Analytics
+### 1.  Proyecto Datathon - Health Analytics
 **Ubicación:** `Datathon/`
 
 Sistema completo de machine learning para predicción en diagnóstico médico.
@@ -22,7 +22,7 @@ Sistema completo de machine learning para predicción en diagnóstico médico.
 - Validación cruzada y experiment tracking con MLflow
 - Preprocesamiento automatizado con feature engineering
 
-### 2. 🧠 Proyecto Deep Learning - Computer Vision
+### 2. Proyecto Deep Learning - Computer Vision
 **Ubicación:** `Deep_Learning/`
 
 Implementaciones de redes neuronales para problemas de visión artificial.
@@ -34,7 +34,7 @@ Implementaciones de redes neuronales para problemas de visión artificial.
 
 **Tecnologías:** TensorFlow/Keras, PyTorch
 
-### 3. 📊 Análisis Exploratorio y Utilidades
+### 3.  Análisis Exploratorio y Utilidades
 **Ubicación:** `Funciones/`
 
 Scripts modulares para análisis de datos y machine learning.
@@ -45,7 +45,7 @@ Scripts modulares para análisis de datos y machine learning.
 - **`Funciones_Optimizacion.py`** - Hyperparameter tuning y validación
 - **`Funciones_Preprocesamiento.py`** - Limpieza y transformación de datos
 
-## 🛠️ Stack Tecnológico Completo
+##  Stack Tecnológico Completo
 
 ### **Lenguajes y Frameworks:**
 - **Python 3.8+** - Lenguaje principal
@@ -60,4 +60,4 @@ Scripts modulares para análisis de datos y machine learning.
 - **Jupyter Notebooks** - Análisis interactivo
 - **Git** - Control de versiones
 
-## 📁 Estructura Completa del Repositorio
+##  Estructura Completa del Repositorio
