@@ -1,45 +1,63 @@
-# Topicos_Selectos_II_git
-Tópicos Selectos II - Python Data Science Projects
-Repositorio académico que contiene scripts modulares en Python para análisis de datos y proyectos de deep learning, implementados como parte del curso de Tópicos Selectos II.
+# 📚 Tópicos Selectos II - Portfolio de Proyectos
 
-Proyectos Implementados
-# 1.  Proyecto Datathon - Análisis Predictivo
-Ubicación: Datathon/
+Repositorio académico que contiene múltiples proyectos de ciencia de datos y deep learning desarrollados para el curso de Tópicos Selectos II. Incluye scripts modulares para datathon, redes neuronales y análisis de datos.
 
-Pipeline completo de machine learning para competencias de datos, desde preprocesamiento hasta modelado avanzado.
+## 🗂️ Proyectos Implementados
 
-Estructura modular:
+### 1. 🏆 Proyecto Datathon - Health Analytics
+**Ubicación:** `Datathon/`
 
-Funciones_Analisis_Exploratorio.py - EDA, visualizaciones y análisis estadístico
+Sistema completo de machine learning para predicción en diagnóstico médico.
 
-Funciones_Modelado.py - Entrenamiento y evaluación de modelos de ML
+#### **Módulos Principales:**
+- **`module_data.py`** - Preprocesamiento avanzado de datos médicos
+- **`module_ml.py`** - Framework de ML con validación cruzada y MLflow
+- **`main.py`** - Pipeline principal de ejecución
+- **`module_path.py`** - Gestión de rutas y configuración
 
-Funciones_Optimizacion.py - Fine-tuning de hiperparámetros y validación cruzada
+**Características:**
+- Pipeline completo para Women in Data Science (WiDS) 2024 Datathon
+- Predicción de `DiagPeriodL90D` (diagnóstico dentro de 90 días)
+- 5+ algoritmos de clasificación implementados
+- Validación cruzada y experiment tracking con MLflow
+- Preprocesamiento automatizado con feature engineering
 
-Funciones_Preprocesamiento.py - Limpieza, transformación y feature engineering
+### 2. 🧠 Proyecto Deep Learning - Computer Vision
+**Ubicación:** `Deep_Learning/`
 
-# 2. Proyecto Deep Learning - Redes Neuronales
-Ubicación: Deep_Learning/
+Implementaciones de redes neuronales para problemas de visión artificial.
 
-Implementación de redes neuronales para diversos problemas de machine learning.
+#### **Scripts Modulares:**
+- **`RedNeuronal_Clasificacion.py`** - Redes para clasificación de imágenes
+- **`RedNeuronal_Regresion.py`** - Redes para problemas de regresión
+- **`Funciones_RedNeuronal.py`** - Funciones auxiliares y utilitarias
 
-Scripts principales:
+**Tecnologías:** TensorFlow/Keras, PyTorch
 
-RedNeuronal_Clasificacion.py - NN para problemas de clasificación
+### 3. 📊 Análisis Exploratorio y Utilidades
+**Ubicación:** `Funciones/`
 
-RedNeuronal_Regresion.py - NN para problemas de regresión
+Scripts modulares para análisis de datos y machine learning.
 
-Funciones_RedNeuronal.py - Utilidades y funciones auxiliares para DL
+#### **Módulos de Análisis:**
+- **`Funciones_Analisis_Exploratorio.py`** - EDA y visualizaciones
+- **`Funciones_Modelado.py`** - Entrenamiento y evaluación de modelos
+- **`Funciones_Optimizacion.py`** - Hyperparameter tuning y validación
+- **`Funciones_Preprocesamiento.py`** - Limpieza y transformación de datos
 
-# Stack Tecnológico
-Lenguaje: Python 3.8+
+## 🛠️ Stack Tecnológico Completo
 
-Machine Learning: scikit-learn, XGBoost, LightGBM
+### **Lenguajes y Frameworks:**
+- **Python 3.8+** - Lenguaje principal
+- **Scikit-learn** - Machine Learning tradicional
+- **TensorFlow/Keras** - Deep Learning
+- **PyTorch** - Redes neuronales
+- **Pandas/Numpy** - Procesamiento de datos
+- **Matplotlib/Seaborn** - Visualizaciones
 
-Deep Learning: TensorFlow/Keras, PyTorch
+### **Herramientas de Desarrollo:**
+- **MLflow** - Experiment tracking y model management
+- **Jupyter Notebooks** - Análisis interactivo
+- **Git** - Control de versiones
 
-Análisis de datos: pandas, numpy, scipy
-
-Visualización: matplotlib, seaborn, plotly
-
-Utilidades: jupyter, pickle, os, sys
+## 📁 Estructura Completa del Repositorio
