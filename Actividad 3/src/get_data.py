@@ -1,7 +1,8 @@
 import random, datetime, os, shutil, math
+from pathlib import Path
 
-train_dir = "../data/train"
-test_dir = "../data/test"
+train_dir = Path("/Users/gretelfurrer/MAESTRIA_CIENCIA_DE_DATOS/3rd_sem_MCD/GRANDES_BASES_DE_DATOS_II/Topicos_Selectos_II_git/Actividad 3/data/train")
+test_dir = Path("/Users/gretelfurrer/MAESTRIA_CIENCIA_DE_DATOS/3rd_sem_MCD/GRANDES_BASES_DE_DATOS_II/Topicos_Selectos_II_git/Actividad 3/data/test")
 
 def prep_test_data(pokemon, train_dir, test_dir):
     pop = os.listdir(train_dir+'/'+pokemon)
