@@ -4,6 +4,7 @@ Trains a PyTorch image classification model using device-agnostic code.
 
 import os
 import torch
+from pathlib import Path
 import data_setup, engine, model_builder, utils
 
 from torchvision import transforms
@@ -16,9 +17,10 @@ def main():
     HIDDEN_UNITS = 64
     LEARNING_RATE = 0.001
 
-    # Setup directories
-    train_dir = "../data/train"
-    test_dir = "../data/test"
+    # Resolve project base dir (two levels up from src/) and data dirs
+    base_dir = Path(__file__).resolve().parent.parent  # .../Actividad 3
+    train_dir = base_dir / "data" / "train"
+    test_dir  = base_dir / "data" / "test"
 
     # Setup target device
     if torch.backends.mps.is_available():
@@ -40,8 +42,8 @@ def main():
 
     # Create DataLoaders with help from data_setup.py
     train_dataloader, test_dataloader, class_names = data_setup.create_dataloaders(
-        train_dir=train_dir,
-        test_dir=test_dir,
+        train_dir=str(train_dir),
+        test_dir=str(test_dir),
         transform=data_transform,
         batch_size=BATCH_SIZE
     )

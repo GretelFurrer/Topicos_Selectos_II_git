@@ -24,7 +24,7 @@ def prep_test_data(pokemon, train_dir, test_dir, n=15):
     for f in test_data:
         shutil.copy2(src_dir / f, dst_dir / f)
 
-# ...existing code...
+
 for poke in sorted(os.listdir(train_dir)):
     if poke.startswith("."):
         continue
